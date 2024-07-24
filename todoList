@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1d1e22, #000000);
+        padding: 10px;
+    }
+
+    .todo-app {
+        width: 100%;
+        max-width: 640px;
+        background-color: rgb(99, 94, 94);
+        margin: 100px auto 20px;
+        padding: 40px 30px 70px;
+        border-radius: 10px;
+    }
+
+    .todo-app h2 {
+        color: #002765;
+        display: flex;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .todo-app h2 img {
+        width: 30px;
+        margin-left: 10px;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #111111;
+        border-radius: 10px;
+        padding-left: 20px;
+        margin-bottom: 25px;
+    }
+
+    input {
+        flex: 1;
+        border: none;
+        outline: none;
+        color: #fff;
+        background-color: transparent;
+        padding: 10px;
+        font-weight: 10px;
+    }
+
+    button {
+        border: none;
+        outline: none;
+        padding: 16px 50px;
+        background: #633ac5;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    ul li {
+        list-style: none;
+        font-size: 17px;
+        padding: 12px 8px 12px 50px;
+        user-select: none;
+        cursor: pointer;
+        position: relative;
+    }
+
+    ul li::before {
+        content: ' ';
+        position: absolute;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background-image: url(/assets/unchecked.png);
+        background-size: cover;
+        background-position: center;
+        top: 12px;
+        left: 8px;
+    }
+
+    ul li.checked {
+        color: #555;
+        text-decoration: line-through;
+    }
+
+    ul li.checked::before {
+
+        background-image: url(/assets/checked.png);
+    }
+
+    ul li span {
+        position: absolute;
+        right: 0;
+        top: 5px;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+        color: rgb(0, 0, 0);
+        line-height: 40px;
+        text-align: center;
+        border-radius: 20px;
+    }
+
+    ul li span:hover {
+        background-color: #6945e0;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h2> KaamKaroKaam <img src="/assets/icon.png" alt="img"></h2>
+            <div class="row">
+                <input type="text" id="input-box" placeholder="Add your text">
+                <button>Add</button>
+            </div>
+            <ul class="list-container">
+                <!-- <li class="checked">task1</li>
+                <li>task2</li>
+                <li>task3</li> -->
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    const inputbox = document.querySelector('#input-box');
+    const listcontainer = document.querySelector('.list-container');
+    const button = document.querySelector('button');
+
+    button.addEventListener('click', addtask);
+
+    inputbox.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            addtask();
+        }
+    });
+
+    function addtask() {
+        if (inputbox.value === '') {
+            window.alert("You must write something!")
+        } else {
+            let li = document.createElement('li');
+            li.innerHTML = inputbox.value;
+            listcontainer.appendChild(li);
+            let span = document.createElement('span');
+            span.innerHTML = "\u00d7";
+            li.appendChild(span);
+        }
+        inputbox.value = "";
+        savedata();
+    }
+
+    listcontainer.addEventListener('click', function (e) {
+        if (e.target.tagName === "LI") {
+            e.target.classList.toggle("checked")
+            savedata();
+        }
+        else if (e.target.tagName === "SPAN") {
+            e.target.parentElement.remove();
+            savedata();
+        }
+
+    }, false);
+
+    function savedata() {
+        localStorage.setItem('data', listcontainer.innerHTML)
+    }
+    function showTask() {
+        listcontainer.innerHTML = localStorage.getItem("data");
+    }
+    showTask()
+</script>
+
+</html>
