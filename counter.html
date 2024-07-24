@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter</title>
+</head>
+<style>
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    .counter {
+        margin-left: 40%;
+        margin-top: 10%;
+        font-size: 100px;
+    }
+
+    .btn {
+        padding: 30px;
+        font-size: 50px;
+    }
+</style>
+
+<body>
+    <div class="counter">
+        <span class="display"></span><br>
+        <button id="increase" class="btn">+</button>
+        <button id="zero" class="btn">0</button>
+        <button id="decrease" class="btn">-</button>
+
+    </div>
+</body>
+<script>
+
+    let count = 0;
+
+    function increaseit() {
+        count++
+        document.querySelector('.display').innerHTML = count;
+    }
+    function decreaseit() {
+        count--
+        document.querySelector('.display').innerHTML = count;
+    }
+    function MakeitZero() {
+        count =0
+        document.querySelector('.display').innerHTML = count;
+    }
+
+
+    document.querySelector('#increase').addEventListener('click', increaseit)
+    document.querySelector('#decrease').addEventListener('click', decreaseit)
+    document.querySelector('#zero').addEventListener('click', MakeitZero)
+</script>
+
+</html>

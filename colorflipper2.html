@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color flipper</title>
+</head>
+<style>
+    body{
+        color: white;
+        background-color: rgb(874,874,874);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+   
+    button{
+        margin-top: 15%;
+        font-size: 50px;
+        width: 200px;
+        height: 100px;
+        font-weight: 800;
+        border-radius: 20px;
+        box-shadow: 9px 4px 4px 9px ;
+    }
+</style>
+<body>
+        <button id="btn">Click</button>
+</body>
+<script>
+//    const btn=  document.querySelector('#btn');
+//    const body=  document.querySelector('body');
+
+
+//     // let random = Math.floor(Math.random()*1000000)
+//     // let color = '#f' + random;
+
+//     let random = Math.floor(Math.random()*1000)
+//     let color =`rgb(${random},${random},${random})`;
+//     // console.log(color);
+
+//     function woo(){
+//     body.style.backgroundColor='color'}
+
+//    btn.addEventListener('click',woo())
+//chatgpt give suggestuons
+const btn = document.querySelector('#btn');
+        const body = document.querySelector('body');
+
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r},${g},${b})`;
+        }
+
+        function changeBackgroundColor() {
+            const randomColor = getRandomColor();
+            body.style.backgroundColor = randomColor;
+        }
+
+        btn.addEventListener('click', changeBackgroundColor);
+
+</script>
+</html>
